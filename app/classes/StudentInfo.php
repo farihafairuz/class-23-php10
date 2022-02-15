@@ -30,9 +30,23 @@ class StudentInfo
 
     public function index()
     {
-       $this->imageName = $_FILES['img']['name'];
-       $this->imageDirectory = 'assets/img/upload/'.$this->imageName;
-       move_uploaded_file($_FILES['img']['tmp_name'], $this->imageDirectory);
+//       $this->imageName = $_FILES['img']['name'];
+//       $this->imageDirectory = 'assets/img/upload/'.$this->imageName;
+//       move_uploaded_file($_FILES['img']['tmp_name'], $this->imageDirectory);
+//       echo 'success';
+        $this->imageUpload();
+
+        $db= 'db.txt';
+        $file = fopen($db, 'a');
+        fwrite($file, 'hello world');
+        fclose($file);
+        echo'success';
+    }
+    protected function imageUpload()
+    {
+       $this->imageName = time().$this->imageFile['name'];
+       $this->imageDirectory ='assets/img/upload/'.$this->imageName;
+       move_uploaded_file($this->imageFile['tmp_name'], $this->imageDirectory);
        echo 'success';
     }
 
