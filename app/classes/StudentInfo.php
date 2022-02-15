@@ -1,0 +1,39 @@
+<?php
+
+
+namespace App\classes;
+
+
+class StudentInfo
+{
+    protected $name;
+    protected $email;
+    protected $phone;
+    protected $value;
+    protected $result;
+    protected $imageFile;
+    protected $imageName, $imageDirectory;
+    public function __construct($post=null, $file=null)
+    {
+        if($post)
+        {
+            $this->name  =  $post['name'];
+            $this->email =  $post['mail'];
+            $this->phone =  $post['phn'];
+            $this->value =  $post;
+        }
+        if($file)
+        {
+            $this->imageFile = $file['img'];
+        }
+    }
+
+    public function index()
+    {
+       $this->imageName = $_FILES['img']['name'];
+       $this->imageDirectory = 'assets/img/upload/'.$this->imageName;
+       move_uploaded_file($_FILES['img']['tmp_name'], $this->imageDirectory);
+       echo 'success';
+    }
+
+}
